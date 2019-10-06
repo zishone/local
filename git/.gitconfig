@@ -1,0 +1,8 @@
+[user]
+    email = zishgarces@gmail.com
+    name = zishone
+[core]
+    ignorecase = false
+[alias]
+    branchout = checkout -b
+    fetchout = !git fetch origin $1 && git checkout
