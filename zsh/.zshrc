@@ -32,15 +32,26 @@ export PATH=$PATH:$GOROOT/bin
 
 # MongoDB
 alias mongod="docker run \
-    --name mongodb \
-    -v $HOME/Workspaces/mongodb-ws:/home/mongodb \
-    -p 27017:27017 \
-    -e MONGO_INITDB_ROOT_USERNAME=root \
-    -e MONGO_INITDB_ROOT_PASSWORD=password \
-    -d \
-    mongo:4.2.1 \
-    --config /home/mongodb/config/mongod.conf"
-alias mongo="docker exec \
+  --name mongodb \
+  -v $HOME/Workspaces/mongodb-ws:/home/mongodb \
+  -p 27017:27017 \
+  -e MONGO_INITDB_ROOT_USERNAME=root \
+  -e MONGO_INITDB_ROOT_PASSWORD=password \
+  -d \
+  mongo:4.2 \
+  --config /home/mongodb/config/mongod.conf"
+alias mongosh="docker exec \
   -it \
   mongodb \
   mongo --username root --password password --authenticationDatabase admin"
+
+# PostgreSQL
+alias postgres="docker run \
+  --name postgresql \
+  -v $HOME/Workspaces/postgresql-ws:/home/postgresql \
+  -p 5432:5432 \
+  -e POSTGRES_PASSWORD=password \
+  -e PGDATA=/home/postgresql/data \
+  -d \
+  postgres:9.6-alpine"
+alias postgresh="PGPASSWORD=password psql --host 127.0.0.1 --port 5432 --username postgres"
